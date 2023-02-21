@@ -35,8 +35,11 @@
             else if (document.implementation && document.implementation.createDocument) {
                 xsltProcessor = new XSLTProcessor();
                 xsltProcessor.importStylesheet(xsl);
-                resultDocument = xsltProcessor.transformToDocument(xml);
-                document.getElementById("answer").appendChild(resultDocument);
+                const resultDocument = new XMLSerializer().serializeToString(
+					xsltProcessor.transformToDocument(xml)
+				);
+                 
+                document.getElementById("answer").innerHTML = resultDocument;
             }
             
 
