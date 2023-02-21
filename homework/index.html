@@ -22,9 +22,9 @@
             xhttp.send("");
             return xhttp.responseXML;
         }
-        function transformMath(){
-            xml =  loadXMLDoc("math.xml")
-            xsl =  loadXMLDoc("math.xsl")
+        function transformMath(xmlFile,xslFile){
+            xml =  loadXMLDoc(xmlFile)
+            xsl =  loadXMLDoc(xslFile)
             // Transform
              // code for IE
             if (window.ActiveXObject || xhttp.responseType == "msxml-document") {
@@ -44,15 +44,28 @@
             
 
         }
+        function showblock(){
+           const value =  document.getElementById("menu").value
+           var one = document.getElementById("one")
+           var two = document.getElementById("two")
+
+           if(value === "one"){
+            one.style.display = 'block'
+            two.style.display = 'none'
+           }else {
+            two.style.display = 'block'
+            one.style.display = 'none'
+           }
+        }
     </script>
 </head>
 <body>
     <div class="practiceContainer">
-        <select id="menu">
+        <select id="menu" onchange="showblock()">
             <option value="one"> Задание 1</option>
             <option value="two"> Задание 2</option>
         </select>
-        <div class="container">
+        <div class="container one" id="one">
             <div class="code">
                 <textarea class="first">
                     <строка>
@@ -110,8 +123,24 @@
                     </строка>
                 </textarea>
             </div>
-            <div id="btn">
-                <input type="button" value="To MathJax" onclick="transformMath()">
+            <div id="btn" class="btncontainer" >
+                
+                <input class="btn" type="button" value="To MathJax" onclick="transformMath('first/math.xml','first/math.xsl')">
+            </div>
+            <div class="answer">
+                <div class="first" id="answer">
+                   
+                </div>
+            </div>
+        </div>
+
+        <div class="container two" id="two">
+            <div class="code">
+               
+            </div>
+            <div id="btn" class="btncontainer">
+                
+                <input class="btn" type="button" value="To MathJax" onclick="transformMath('second/svg.xml','second/svg.xsl')">
             </div>
             <div class="answer">
                 <div class="first" id="answer">
