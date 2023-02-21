@@ -5,18 +5,18 @@
     <xsl:template match="/">
         
                 <math xmlns="http://www.w3.org/1998/Math/MathML">
-                    <xsl:apply-template /> 
+                    <xsl:apply-templates /> 
                 </math> 
                                 
     </xsl:template>
     <xsl:template match = "корень">
         <msqrt>
-            <xsl:apply-template select = '*'/> 
+            <xsl:apply-templates select = '*'/> 
         </msqrt>
     </xsl:template>
     <xsl:template match = "строка">
         <mrow>
-            <xsl:apply-template select = '*'/> 
+            <xsl:apply-templates select = '*'/> 
         </mrow>
     </xsl:template>
      <xsl:template match = "оператор">
@@ -36,23 +36,23 @@
     </xsl:template>
     <xsl:template match = "дробь">
         <mfrac>
-             <xsl:apply-template select = '*'/>
+             <xsl:apply-templates select = '*'/>
         </mfrac>
     </xsl:template>
     <xsl:template match = "низверх">
         <munderover>
-            <xsl:apply-template select = '*'/> 
+            <xsl:apply-templates select = '*'/> 
         </munderover>
     </xsl:template>
    
     <xsl:template match = "верх">
         <msup>
-            <xsl:apply-template select = '*'/> 
+            <xsl:apply-templates select = '*'/> 
         </msup>
     </xsl:template>
     <xsl:template match = "низ">
         <msub>
-            <xsl:apply-template select = '*'/> 
+            <xsl:apply-templates select = '*'/> 
         </msub>
     </xsl:template>
     
