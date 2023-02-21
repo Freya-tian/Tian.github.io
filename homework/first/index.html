@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="./index.css">
+    
+    <script src="https://fred-wang.github.io/mathjax.js/mpadded-min.js"></script>
+    <script >
+        function loadXMLDoc(filename) {
+            if (window.ActiveXObject) {
+                xhttp = new ActiveXObject("Msxml2.XMLHTTP");
+            } else {
+                xhttp = new XMLHttpRequest();
+            }
+            xhttp.open("GET", filename, false);
+            try {
+                xhttp.responseType = "msxml-document"
+            } catch (err) {} // Helping IE11
+            xhttp.send("");
+            return xhttp.responseXML;
+        }
+        function transformMath(xmlFile,xslFile){
+            xml =  loadXMLDoc(xmlFile)
+            xsl =  loadXMLDoc(xslFile)
+            // Transform
+             // code for IE
+            if (window.ActiveXObject || xhttp.responseType == "msxml-document") {
+                ex = xml.transformNode(xsl);
+                document.getElementById("answer").innerHTML = ex;
+            }
+            // code for Chrome, Firefox, Opera, etc.
+            else if (document.implementation && document.implementation.createDocument) {
+                xsltProcessor = new XSLTProcessor();
+                xsltProcessor.importStylesheet(xsl);
+                const resultDocument = new XMLSerializer().serializeToString(
+					xsltProcessor.transformToDocument(xml)
+				);
+                 
+                document.getElementById("answer").innerHTML = resultDocument;
+            }
+            
+
+        }
+        function showblock(){
+           const value =  document.getElementById("menu").value
+           var one = document.getElementById("one")
+           var two = document.getElementById("two")
+
+           if(value === "one"){
+            one.style.display = 'block'
+            two.style.display = 'none'
+           }else {
+            two.style.display = 'block'
+            one.style.display = 'none'
+           }
+        }
+    </script>
+</head>
+<body>
+    <div class="practiceContainer">
+        <select id="menu" onchange="showblock()">
+            <option value="one"> Задание 1</option>
+            <option value="two"> Задание 2</option>
+        </select>
+        <div class="container">
+            <div class="one common" id="one">
+                <div class="code">
+                    <pre class="first">
+                        <строка>
+                            <операнд>σ</операнд>
+                            <оператор>=</оператор>
+                                <корень>
+                                    <строка>
+                                        <дробь>
+                                            <строка>
+                                                <число>1</число>
+                                            </строка>
+                                            <строка>
+                                                <операнд>N</операнд>
+                                            </строка>
+                                        </дробь>
+                                        <строка>
+                                            <низверх>
+                                                <строка>
+                                                    <оператор>∑</оператор>
+                                                </строка>
+                                                <строка>
+                                                    <операнд>i</операнд>
+                                                    <оператор>=</оператор>
+                                                    <число>1</число>
+                                                </строка>
+                                                <строка>
+                                                    <операнд>N</операнд>
+                                                </строка>
+                                            </низверх>
+                                                <строка>
+                                                    <верх>
+                                                        <строка>
+                                                            <оператор >(</оператор>
+                                                            <низ>
+                                                                <строка>
+                                                                    <операнд>x</операнд>
+                                                                </строка>
+                                                                <строка>
+                                                                    <операнд>i</операнд>
+                                                                </строка>
+                                                            </низ>
+                                                            <оператор>−</оператор>
+                                                            <операнд>μ</операнд>
+                                                            <оператор >)</оператор>
+                                                        </строка>
+                                                        <строка>
+                                                            <число>2</число>
+                                                        </строка>
+                                                    </верх>
+                                                </строка>
+                                        </строка>
+                                    </строка>
+                                </корень>
+                                <оператор>.</оператор>
+                        </строка>
+                    </pre>
+                </div>
+                <div id="btn" class="btncontainer" >
+                    
+                    <input class="btn" type="button" value="To MathJax" onclick="transformMath('math.xml','math.xsl')">
+                </div>
+                
+            </div>
+    
+            <div class="two common" id="two">
+                <div class="code">
+                   <pre>
+                    <?xml version="1.0" encoding="utf-8" ?>
+                    <?xml-stylesheet type="text/xsl" href="svg.xsl" ?>
+                    <root>
+                     <графика ширина="640" высота="480">
+                     <эллипс id="графика_1" заливка="rgba(255,0,0,0.5)" ободок="white" ширина-ободка="5" cx="206" cy="139" rx="100" ry="100"/>
+                     <эллипс id="графика_2" заливка="rgba(0,0,255,0.5)" ободок="white" ширина-ободка="5" cx="108" cy="111" rx="100" ry="100"/>
+                     <эллипс id="графика_3" заливка="rgba(0,255,0,0.5)" ободок="white" ширина-ободка="5" cx="134" cy="215" rx="100" ry="100"/>
+                     </графика>
+                    </root>
+                   </pre>
+                </div>
+                <div id="btn" class="btncontainer">                    
+                    <input class="btn" type="button" value="To SVG" onclick="transformMath('svg.xml','svg.xsl')">
+                </div>            
+            </div>
+            <div class="answer">
+                <div class="first" id="answer">
+                   
+                </div>
+            </div>
+        </div>
+        
+        
+        
+    </div>
+</body>
+</html>
