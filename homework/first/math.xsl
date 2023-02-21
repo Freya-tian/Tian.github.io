@@ -4,9 +4,14 @@
     <xsl:output method="xml" version="1.0" encoding="UTF-8" indent="yes"/>
    
     <xsl:template match="/">
-        <math xmlns="http://www.w3.org/1998/Math/MathML">
-            <xsl:apply-template /> 
-        </math>                
+        <html>
+            <body>
+                <math xmlns="http://www.w3.org/1998/Math/MathML">
+                    <xsl:apply-template /> 
+                </math> 
+            </body>
+        </html>
+                       
     </xsl:template>
     <xsl:template match = "корень">
         <msqrt>
