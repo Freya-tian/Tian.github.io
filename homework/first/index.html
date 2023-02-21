@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="./index.css">
+    <script >
+        function loadXMLDoc(filename) {
+            if (window.ActiveXObject) {
+                xhttp = new ActiveXObject("Msxml2.XMLHTTP");
+            } else {
+                xhttp = new XMLHttpRequest();
+            }
+            xhttp.open("GET", filename, false);
+            try {
+                xhttp.responseType = "msxml-document"
+            } catch (err) {} // Helping IE11
+            xhttp.send("");
+            return xhttp.responseXML;
+        }
+        function transformMath(){
+            xml =  loadXMLDoc("math.xml")
+            xsl =  loadXMLDoc("math.xsl")
+            // Transform
+             // code for IE
+            if (window.ActiveXObject || xhttp.responseType == "msxml-document") {
+                ex = xml.transformNode(xsl);
+                document.getElementById("answer").innerHTML = ex;
+            }
+            // code for Chrome, Firefox, Opera, etc.
+            else if (document.implementation && document.implementation.createDocument) {
+                xsltProcessor = new XSLTProcessor();
+                xsltProcessor.importStylesheet(xsl);
+                resultDocument = xsltProcessor.transformToFragment(xml, document);
+                document.getElementById("answer").appendChild(resultDocument);
+            }
+            
+
+        }
+    </script>
+</head>
+<body>
+    <div class="practiceContainer">
+        <select id="menu">
+            <option value="one"> Задание 1</option>
+            <option value="two"> Задание 2</option>
+        </select>
+        <div class="container">
+            <div class="code">
+                <textarea class="first">
+                    <строка>
+                        <операнд>σ</операнд>
+                        <оператор>=</оператор>
+                            <корень>
+                                <строка>
+                                    <дробь>
+                                        <строка>
+                                            <число>1</число>
+                                        </строка>
+                                        <строка>
+                                            <операнд>N</операнд>
+                                        </строка>
+                                    </дробь>
+                                    <строка>
+                                        <низверх>
+                                            <строка>
+                                                <оператор>∑</оператор>
+                                            </строка>
+                                            <строка>
+                                                <операнд>i</операнд>
+                                                <оператор>=</оператор>
+                                                <число>1</число>
+                                            </строка>
+                                            <строка>
+                                                <операнд>N</операнд>
+                                            </строка>
+                                        </низверх>
+                                            <строка>
+                                                <верх>
+                                                    <строка>
+                                                        <оператор >(</оператор>
+                                                        <низ>
+                                                            <строка>
+                                                                <операнд>x</операнд>
+                                                            </строка>
+                                                            <строка>
+                                                                <операнд>i</операнд>
+                                                            </строка>
+                                                        </низ>
+                                                        <оператор>−</оператор>
+                                                        <операнд>μ</операнд>
+                                                        <оператор >)</оператор>
+                                                    </строка>
+                                                    <строка>
+                                                        <число>2</число>
+                                                    </строка>
+                                                </верх>
+                                            </строка>
+                                    </строка>
+                                </строка>
+                            </корень>
+                            <оператор>.</оператор>
+                    </строка>
+                </textarea>
+            </div>
+            <div id="btn">
+                <input type="button" value="To MathJax" onclick="transformMath()">
+            </div>
+            <div class="answer">
+                <div class="first" id="answer">
+                   
+                </div>
+            </div>
+        </div>
+        
+    </div>
+</body>
+</html>
