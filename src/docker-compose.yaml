@@ -1,0 +1,8 @@
+version: "1"
+services:
+  web:
+    build: .
+    expose:
+      - 80
+    ports:
+      -"80:80"
