@@ -7,4 +7,5 @@
    2. start client
      ` docker build  -t client . `
      ` docker run -p 3000:3000 client `
+3. open localhost:3000
 
